@@ -12,15 +12,18 @@
             </svg>
         </button>
         <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-        <ul v-if="route.name === 'Home' || route.name === 'Photographers' || route.name === 'Organizers' || route.name === 'Gallery'" class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+        <ul v-if="route.name === 'Home' || route.name === 'Photographers' || route.name === 'Organizers' || route.name === 'Gallery' || route.name === 'Event'" class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
-            <a href="/" class="block py-2 px-3 text-white bg-tertiary-700 rounded md:bg-transparent md:text-tertiary-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">EVENTS</a>
+            <a href="/events" class="block py-2 px-3 text-white bg-tertiary-700 rounded md:bg-transparent md:text-tertiary-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">EVENTS</a>
             </li>
             <li>
             <a href="/organizers" class="block py-2 px-3 text-white bg-tertiary-700 rounded md:bg-transparent md:text-tertiary-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">ORGANIZERS</a>
             </li>
             <li>
-            <a href="/photographers" class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">BE A BIB-O PHOTOGRAPHER</a>
+            <a href="/photographers" class="block py-2 px-3 text-white bg-tertiary-700 rounded md:bg-transparent md:text-tertiary-700 md:p-0 dark:text-white md:dark:text-blue-500">BE A BIB-O PHOTOGRAPHER</a>
+            </li>
+            <li>
+            <a href="/" class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2">FIND YOUR PHOTOS</a>
             </li>
         </ul>
 
@@ -34,6 +37,26 @@
             
             
         </ul>
+
+        <ul v-if="route.name === 'Events'" class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+            <div class="flex gap-5" v-if="!store.isRunnerLoggedIn">
+                <li>
+                    <a data-modal-target="login-modal" data-modal-toggle="login-modal" href="#" class="block py-2 px-3 text-white bg-tertiary-700 rounded md:bg-transparent md:text-tertiary-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">LOGIN</a>
+                </li>
+                <li>
+                    <a href="#" class="block py-2 px-3 text-white bg-tertiary-700 rounded md:bg-transparent md:text-tertiary-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">REGISTER</a>
+                </li>
+            </div>
+            <div class="flex gap-5" v-else>
+                <li>
+                    <a href="#" class="block py-2 px-3 text-white bg-tertiary-700 rounded md:bg-transparent md:text-tertiary-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">HOME</a>
+                </li>
+                <li>
+                    <a href="#" class="block py-2 px-3 text-white bg-tertiary-700 rounded md:bg-transparent md:text-tertiary-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">MY EVENTS</a>
+                </li>
+            </div>
+            
+        </ul>
         </div>
     </div>
     </nav>
@@ -42,6 +65,8 @@
 
 <script setup>
 import { useRoute } from 'vue-router';
+import { useStore } from '../store';
 
 const route = useRoute()
+const store = useStore()
 </script>

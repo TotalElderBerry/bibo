@@ -24,7 +24,6 @@
                             <span class="sr-only">Search</span>
                         </button>
                     </form>
-
                 </div>
             </div>
                 
@@ -127,6 +126,7 @@ onMounted(async () => {
     }
     try {
         eventname.value = await getEventBySlug()
+        console.log(eventname.value);
         albums.value = await getAlbums()
 
         for(const albumIdx in albums.value){

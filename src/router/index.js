@@ -6,6 +6,12 @@ import Organizers from '../pages/Organizers.vue';
 import Organizer from '../pages/Organizer.vue';
 import Photographer from '../pages/Photographer.vue';
 import PhotographerEvent from '../pages/PhotographerEvent.vue';
+import Events from '../pages/Events.vue';
+import Event from '../pages/Event.vue';
+import OrganizerEvent from '../pages/OrganizerEvent.vue';
+import SuccessRegistration from '../pages/SuccessRegistration.vue';
+import { useStore } from '../store';
+import { get } from '../utils/localstorage';
 
 
 const routes = [
@@ -13,6 +19,21 @@ const routes = [
     path: '/', 
     name: 'Home',
     component: Home, 
+  },
+  {
+    path: '/events', 
+    name: 'Events',
+    component: Events, 
+  },
+  {
+    path: '/events/:id', 
+    name: 'Event',
+    component: Event, 
+  },
+  {
+    path: '/events/registration/success', 
+    name: 'RegistrationSuccess',
+    component: SuccessRegistration, 
   },
   {
     path: '/gallery',
@@ -35,6 +56,11 @@ const routes = [
     component: Organizer,
   },
   {
+    path: '/organizer/event/:id',
+    name: 'OrganizerEvent',
+    component: OrganizerEvent,
+  },
+  {
     path: '/photographer/home',
     name: 'Photographer',
     component: Photographer,
@@ -51,6 +77,19 @@ const router = createRouter({
   history: createWebHistory(),
   routes
 });
+
+router.beforeEach((to, _from, next) => {
+  const store = useStore()
+  const runnerId = get('runner_id')
+  const photogId = get('photog_id')
+  const eventOrgId = get('eventOrg_id')
+
+  if(runnerId) store.isPhotographerLoggedIn = true
+  if(photogId) store.isRunnerLoggedIn = true
+  if(eventOrgId) store.isEventOrgLoggedIn = true
+
+  next()
+})
 
 export default router;
 

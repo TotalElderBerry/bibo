@@ -1,6 +1,8 @@
 <script setup>
+import { useStore } from './store';
 import NavBar from './components/NavBar.vue';
-import Home from './pages/Home.vue';
+
+const store = useStore()
 </script>
 
 <template>
@@ -12,4 +14,4 @@ import Home from './pages/Home.vue';
 </template>
 
 <style scoped>
-</style>
+</style>./store

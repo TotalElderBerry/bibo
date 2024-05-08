@@ -44,7 +44,7 @@
             </div>
             <div v-for="e in events" class="bg-tertiary-50 p-4 grid grid-cols-3 place-items-center border-b-2 border-tertiary-300">
                 <div class="text-center">
-                    <h1 class="text-lg text-tertiary-700 font-semibold">{{e.name}}</h1>
+                    <a :href="`/organizer/event/1`" class="text-lg text-tertiary-700 font-semibold cursor-pointer hover:underline">{{e.name}}</a>
                     <h1 class="text-xs mt-1 font-light">{{getReadableDate(e.date)}} </h1>
                 </div>
 
@@ -117,6 +117,7 @@ const submitEventAsync = async () => {
         form.append('time_end', '')
         form.append('short_description', '')
         form.append('no_of_participants', 0)
+        form.append('price', 0)
         
         console.log(event.value.date);
         const response = axios.post('http://localhost:5000/event/1/create_event',form, {
