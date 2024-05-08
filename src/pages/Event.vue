@@ -1,27 +1,32 @@
 <template>
     <div class="max-w-screen-xl p-4 mx-auto mt-10" v-if="!isLoading">
-        <div class="flex justify-center mb-10">
-            <div class="bg-tertiary-100 px-10 py-2 rounded-md">
-                <h1 class="mb-3 text-center font-bold text-lg">Countdown</h1>
+        <div class="relative flex justify-center mb-10 bg-tertiary-200 p-10 rounded-xl">
+            <div class="absolute inset-0  flex bg-red-300 rounded-xl">
+                <img  src="../assets/runningman.jpg" class="max-h-full rounded-xl w-full object-cover bg-center">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-tertiary-900 to-tertiary-300 opacity-70 rounded-xl"></div>
+
+            <div class="text-white px-10 py-2 rounded-md relative">
+                <h1 class="mb-5 text-center font-black text-3xl">Countdown</h1>
                 <div class="flex gap-3">
                     <div class="text-center w-20">
-                        <h1 class="bg-tertiary-800 text-white rounded-md h-10 flex items-center justify-center text-xl font-bold">{{months}}</h1>
-                        <h1 class="text-sm mt-2">Months</h1>
+                        <h1 class="bg-tertiary-800 text-white rounded-md h-10 flex items-center justify-center text-3xl font-bold">{{months}}</h1>
+                        <h1 class="text-sm mt-2 font-bold">Months</h1>
                     </div>
                     <div class="text-center w-20">
-                        <h1 class="bg-tertiary-800 text-white rounded-md h-10 flex items-center justify-center text-xl font-bold">{{days}}</h1>
-                        <h1 class="text-sm mt-2">Days</h1>
+                        <h1 class="bg-tertiary-800 text-white rounded-md h-10 flex items-center justify-center text-3xl font-bold">{{days}}</h1>
+                        <h1 class="text-sm mt-2 font-bold">Days</h1>
                     </div>
                     <div class="text-center w-20">
-                        <h1 class="bg-tertiary-800 text-white rounded-md h-10 flex items-center justify-center text-xl font-bold">{{ hours }}</h1>
-                        <h1 class="text-sm mt-2">Hrs</h1>
+                        <h1 class="bg-tertiary-800 text-white rounded-md h-10 flex items-center justify-center text-3xl font-bold">{{ hours }}</h1>
+                        <h1 class="text-sm mt-2 font-bold">Hrs</h1>
                     </div>
                     <div class="text-center w-20">
-                        <h1 class="bg-tertiary-800 text-white rounded-md h-10 flex items-center justify-center text-xl font-bold">{{ minutes }}</h1>
-                        <h1 class="text-sm mt-2">Min</h1>
+                        <h1 class="bg-tertiary-800 text-white rounded-md h-10 flex items-center justify-center text-3xl font-bold">{{ minutes }}</h1>
+                        <h1 class="text-sm mt-2 font-bold">Min</h1>
                     </div>
                     <div class="text-center w-20">
-                        <h1 class="bg-tertiary-800 text-white rounded-md h-10 flex items-center justify-center text-xl font-bold">{{ seconds }}</h1>
+                        <h1 class="bg-tertiary-800 text-white rounded-md h-10 flex items-center justify-center text-3xl font-bold">{{ seconds }}</h1>
                         <h1 class="text-sm mt-2">Secs</h1>
                     </div>
                 </div>
@@ -89,6 +94,7 @@
             
             <div class="col-span-2">
                 <div class="space-y-4 max-w-[600px] mx-auto border p-5 rounded-md" >
+                    <h1 class="font-bold text-lg">Registration</h1>
                         <div>
                             <label for="myname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
                             <input  type="text" name="myname" id="myname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-tertiary-500 focus:border-tertiary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Your Name"  />
@@ -123,15 +129,15 @@
                         <label for="myname" class="block  text-sm font-medium text-gray-900 dark:text-white">Categories</label>
                         <div class="flex items-center gap-4">
                             <div class="flex items-center ">
-                            <input v-model="category" checked id="default-radio-1" type="radio" value="5km" name="default-radio" class="w-4 h-4 text-tertiary-600 bg-gray-100 border-gray-300 focus:ring-tertiary-500 dark:focus:ring-tertiary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <input v-model="category" checked id="default-radio-1" type="radio" value="5 km" name="default-radio" class="w-4 h-4 text-tertiary-600 bg-gray-100 border-gray-300 focus:ring-tertiary-500 dark:focus:ring-tertiary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">5km</label>
                         </div>
                         <div class="flex items-center">
-                            <input v-model="category"  id="default-radio-2" type="radio" value="10km" name="default-radio" class="w-4 h-4 text-tertiary-600 bg-gray-100 border-gray-300 focus:ring-tertiary-500 dark:focus:ring-tertiary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <input v-model="category"  id="default-radio-2" type="radio" value="10 km" name="default-radio" class="w-4 h-4 text-tertiary-600 bg-gray-100 border-gray-300 focus:ring-tertiary-500 dark:focus:ring-tertiary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">10km</label>
                         </div>
                         <div class="flex items-center">
-                            <input v-model="category"  id="default-radio-2" type="radio" value="21km" name="default-radio" class="w-4 h-4 text-tertiary-600 bg-gray-100 border-gray-300 focus:ring-tertiary-500 dark:focus:ring-tertiary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <input v-model="category"  id="default-radio-2" type="radio" value="21 km" name="default-radio" class="w-4 h-4 text-tertiary-600 bg-gray-100 border-gray-300 focus:ring-tertiary-500 dark:focus:ring-tertiary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">21km</label>
                         </div>
                     </div>
@@ -157,7 +163,7 @@ const router = useRouter()
 const event = ref()
 const runner = ref()
 const isLoading = ref(true)
-const category = ref('5km')
+const category = ref('5 km')
 const months = ref()
 const days = ref()
 const hours = ref()
@@ -198,8 +204,9 @@ const registerEvent = async () => {
     const id = get('runner_id')
     try {
         const form = new FormData()
-        form.append('category','5km')
+        form.append('category',category.value)
         const response = await axios.post(`http://localhost:5000/runner/${id}/register_event/${event.value.id}`, form)
+        console.log(response.data);
         if(response.data.success){
             router.push({name: 'RegistrationSuccess'})
             const $targetEl = document.getElementById('confirm-modal');

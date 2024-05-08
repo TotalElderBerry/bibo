@@ -22,26 +22,17 @@
                         
                         <div>
                             <label for="myname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Name</label>
-                            <input  type="text" name="myname" id="myname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-tertiary-500 focus:border-tertiary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Your Name" required />
-                        </div>
-                        <div>
-                            <label for="alias" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">What do you want to be called?</label>
-                            <input  type="text" name="alias" id="myname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-tertiary-500 focus:border-tertiary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Cameramanigga" required />
+                            <input v-model="registerForm.name" type="text" name="myname" id="myname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-tertiary-500 focus:border-tertiary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Your Name" required />
                         </div>
                         <div>
                             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                            <input  type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-tertiary-500 focus:border-tertiary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
+                            <input  v-model="registerForm.email" type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-tertiary-500 focus:border-tertiary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
                         </div>
                         <div>
                             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-                            <input  type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-tertiary-500 focus:border-tertiary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
+                            <input v-model="registerForm.password" type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-tertiary-500 focus:border-tertiary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
                         </div>
-                        <div class="flex justify-between">
-                            <div class="flex items-start">
-                            </div>
-                            <a href="#" class="text-sm text-blue-700 hover:underline dark:text-blue-500">Already have an account?</a>
-                        </div>
-                        <button data-modal-hide="authentication-modal"  class="w-full text-white bg-tertiary-700 hover:bg-tertiary-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create account</button>
+                        <button @click.prevent="submitRegister" data-modal-hide="authentication-modal"  class="w-full text-white bg-tertiary-700 hover:bg-tertiary-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create account</button>
                         
                     </form>
                 </div>
@@ -52,4 +43,15 @@
 </template>
 
 <script setup>
+
+import {useRouter} from 'vue-router'
+const $router = useRouter()
+const {registerForm} = defineProps(['registerForm'])
+const emit = defineEmits(['registerEvent'])
+
+const submitRegister =  () => {
+    emit('registerEvent')
+    // $router.push('/photographer/home')
+}
+
 </script>

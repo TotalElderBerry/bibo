@@ -44,7 +44,7 @@
             </div>
             <div v-for="e in events" class="bg-tertiary-50 p-4 grid grid-cols-3 place-items-center border-b-2 border-tertiary-300">
                 <div class="text-center">
-                    <a :href="`/organizer/event/1`" class="text-lg text-tertiary-700 font-semibold cursor-pointer hover:underline">{{e.name}}</a>
+                    <a :href="`/organizer/event/${e.slug}`" class="text-lg text-tertiary-700 font-semibold cursor-pointer hover:underline">{{e.name}}</a>
                     <h1 class="text-xs mt-1 font-light">{{getReadableDate(e.date)}} </h1>
                 </div>
 
@@ -59,7 +59,7 @@
                 </div>
             </div>
         </div>
-        <CreateEventModal :event="event" @submitEvent="submitEvent"/>
+        <CreateEventModal  :event="event" @submitEvent="submitEvent"/>
     </div>
 </template>
 
@@ -74,7 +74,9 @@ const event = ref({
     name: '',
     venue: '',
     date: '',
-    datetime_created: ''
+    datetime_created: '',
+    price: 100,
+    no_of_participants: 100,
 })
 
 const events = ref([])
@@ -116,13 +118,14 @@ const submitEventAsync = async () => {
         form.append('time_start', '')
         form.append('time_end', '')
         form.append('short_description', '')
-        form.append('no_of_participants', 0)
-        form.append('price', 0)
+        form.append('no_of_participants', event.value.no_of_participants)
+        form.append('price', 100)
         
         console.log(event.value.date);
-        const response = axios.post('http://localhost:5000/event/1/create_event',form, {
+        const response = await axios.post('http://localhost:5000/event/1/create_event',form, {
             headers: {'Content-Type': 'multipart/form-data'}
         })
+        console.log(response);
     } catch (error) {
         console.log(error);
     }

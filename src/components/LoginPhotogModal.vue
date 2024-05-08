@@ -57,6 +57,6 @@ const emit = defineEmits(['loginEvent'])
 
 const submitLogin =  () => {
     emit('loginEvent')
-    $router.push('/photographer/home')
+    // $router.push('/photographer/home')
 }
 </script>

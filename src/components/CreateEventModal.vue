@@ -17,11 +17,15 @@
                     </button>
                 </div>
                 <!-- Modal body -->
-                <div class="p-4 md:p-5">
+                <div class="p-4 md:p-5" v-if="step === 1">
                     <form class="space-y-4" action="#">
                         <div>
                             <label for="event-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Event Name</label>
                             <input v-model="event.name" @input="updateName($event.target.value)" type="text" name="event-name" id="event-name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-tertiary-500 focus:border-tertiary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Event Name" required />
+                        </div>
+                        <div>
+                            <label for="event-price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Max Participants</label>
+                            <input v-model="event.no_of_participants" @input="updateParticipants($event.target.value)" type="text" name="event-price" id="event-price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-tertiary-500 focus:border-tertiary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Event Name" required />
                         </div>
                         <div>
                             <label for="event-location" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Event Location</label>
@@ -36,8 +40,22 @@
                             </div>
                             <input v-model="event.date" @input="updateDate($event.target.value)" datepicker type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-tertiary-500 focus:border-tertiary-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
                         </div>
+                        <button class="w-full text-white bg-tertiary-700 hover:bg-tertiary-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" @click="()=>step=2">Next Step</button>
+                    </form>
+                </div>
+
+                <div class="p-4 md:p-5" v-if="step === 2">
+                    <form class="space-y-4" action="#">
+                        <div class="grid grid-cols-4 gap-2" v-for="category in categories">
+                            <input name="category" type="text" id="category" placeholder="5km" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-tertiary-500 focus:border-tertiary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" :value="category.category"/>
+                            <input type="text" name="event-name" id="event-name" class="col-span-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-tertiary-500 focus:border-tertiary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Price" required :value="category.price"/>
+                        </div>
+                        <div>
+                            <button class="w-full flex items-center justify-center gap-2 text-tertiary-900 border border-tertiary-600 outline-tertiary-700  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-2 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            <span><PlusIcon class="w-5"/> </span>
+                                Add Category</button>
+                        </div>
                         <button data-modal-hide="create-event-modal" @click.prevent="submitEvent" class="w-full text-white bg-tertiary-700 hover:bg-tertiary-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create Event</button>
-                        
                     </form>
                 </div>
             </div>
@@ -47,8 +65,23 @@
 </template>
 
 <script setup>
+import { PlusIcon } from '@heroicons/vue/24/solid';
 import { ref, defineProps } from 'vue';
-
+const step = ref(1)
+const categories = (
+   [ {
+        category: '5 km',
+        price: 400
+    },
+    {
+        category: '10 km',
+        price: 800
+    },
+    {
+        category: '21 km',
+        price: 1000
+    }]
+)
 // Props
 const { event } = defineProps(['event']);
 // Convert the v-model value to a ref
@@ -69,6 +102,10 @@ const updateVenue = (newValue) => {
     event.venue = newValue;
     // emit('update:modelValue', newValue);
 };
+
+const updateParticipants = (newValue) => {
+    event.no_of_participants = newValue
+}
 
 const submitEvent = () => {
     emit('submitEvent')

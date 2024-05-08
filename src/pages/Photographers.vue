@@ -41,6 +41,10 @@ import LoginPhotogModal from '../components/LoginPhotogModal.vue';
 import {ref, onMounted} from 'vue'
 import axios from 'axios'
 import {set,get} from '../utils/localstorage'
+import { useRouter } from 'vue-router';
+
+
+const router = useRouter()
 const registerForm = ref({
     name: '',
     alias: '',
@@ -65,8 +69,12 @@ const loginAsync = async () => {
             headers: {'Content-Type': 'multipart/form-data'}
         })
         console.log(response.data);
-        const id = response.data[1].data_id
-        set("photog_id",id);
+        if(response.data[0].success){
+            const id = response.data[1].data
+            console.log(id);
+            set("photog_id",id);
+            router.push('/photographer/home')
+        }
     } catch (error) {
         console.log(error);
     }

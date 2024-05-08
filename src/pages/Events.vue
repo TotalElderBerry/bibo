@@ -1,12 +1,29 @@
 <template>
 <div>
-    <div class="flex flex-col gap-2 bg-gradient-to-t from-tertiary-400 to-tertiary-100 justify-center items-center h-[260px] mt-5">
-        <h1 class="text-6xl font-bold text-center text-tertiary-800 ">
+    <div class="relative">
+        <!-- <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../assets/ccm.jpg');"></div> -->
+        <div class="absolute inset-0  flex bg-red-300">
+            <img  src="../assets/allofus.jpg" class="max-h-full w-full object-cover bg-center">
+        </div>
+        <!-- Gradient Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-t from-tertiary-900 via-tertiary-500 to-tertiary-100 opacity-70"></div>
+
+    <!-- Content -->
+    <div class="absolute flex flex-col justify-center items-center h-[450px] relative z-10">
+        <h1 class="text-7xl font-bold text-center text-white">
             Events
         </h1>
-        <p class="font-medium text-white text-lg mt-2">Register and join the event para happy tang tanan</p>
+        <p class="font-medium text-white text-xl mt-10">Register and join the event para happy tang tanan</p>
     </div>
-
+        <!-- <div class="flex flex-col gap-2 bg-gradient-to-t from-tertiary-400 to-tertiary-100 justify-
+        center items-center h-[260px] mt-5">
+            <h1 class="text-6xl font-bold text-center text-tertiary-800 ">
+                Events
+            </h1>
+            <p class="font-medium text-white text-lg mt-2">Register and join the event para happy tang tanan</p>
+        </div> -->
+    </div>
+        
     <div class="max-w-screen-xl mx-auto mt-5 grid grid-cols-3 gap-2">
         <div v-for="event in events" class=" max-w-sm p-6 bg-tertiary-50 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <a :href="`/events/${event.slug}`">
@@ -52,6 +69,7 @@
     </div>
 
     <LoginRunnerModal :loginForm="loginForm" @loginEvent="loginAsync"/>
+    <RegisterRunnerModal :registerForm="registerForm" @registerEvent="registerAsync"/>
 </div>
 </template>
 
@@ -61,6 +79,7 @@ CalendarDaysIcon
 import axios from 'axios'
 import {ref,onMounted} from 'vue'
 import LoginRunnerModal from '../components/LoginRunnerModal.vue';
+import RegisterRunnerModal from '../components/RegisterRunnerModal.vue';
 import { useRoute, useRouter } from 'vue-router';
 import { set } from '../utils/localstorage';
 import { Modal } from 'flowbite';
@@ -73,6 +92,13 @@ const route = useRoute()
 const loginForm = ref({
     name: '',
     alias: '',
+    email: '',
+    password: ''
+})
+
+const registerForm = ref({
+    firstName: '',
+    lastName: '',
     email: '',
     password: ''
 })
@@ -109,6 +135,22 @@ const loginAsync = async () => {
     }
 }
 
+const registerAsync = async () => {
+    try {
+        const form = new FormData()
+        form.append('first_name', registerForm.value.firstName)
+        form.append('last_name', registerForm.value.lastName)
+        form.append('email', registerForm.value.email)
+        form.append('password', registerForm.value.password)
+                
+        const response =await axios.post('http://localhost:5000/runner/registration',form, {
+            headers: {'Content-Type': 'multipart/form-data'}
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 const getEvents = async () => {
     try {
         const response = await axios.get('http://localhost:5000/event')
@@ -131,6 +173,6 @@ const getEventBySlug = async () => {
 
 onMounted(async() => {
     await getEvents()
-    await getEventBySlug()
+    // await getEventBySlug()
 })
 </script>

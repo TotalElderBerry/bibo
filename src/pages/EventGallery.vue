@@ -29,7 +29,7 @@
                 
             <div v-for="album in albumPhotog" class="my-5 bg-tertiary-50 p-5">
                 <h5 class="text-tertiary-800 text-lg">Album By <span class="font-bold">{{album.photographer.alias}}</span></h5>
-                <h5 class="text-xs my-2">{{ album.album.number_of_uploads }} out of {{ album.album.number_of_uploads }} photos</h5>
+                <h5 class="text-xs my-2">{{ album.images.length }} out of {{ album.album.number_of_uploads }} photos</h5>
                     <div class="grid grid-cols-7 gap-4 my-5">
                         <div @click="getSelectedImage(fname.path, fname.filename)" v-for="fname,index in album.images" :key="index" class="cursor-pointer thumbnail-container max-h-[100px]" data-modal-target="default-modal" data-modal-toggle="default-modal">
                             <img :src="getPhotoUrl(fname.path, fname.filename)" class="thumbnail rounded-md" />

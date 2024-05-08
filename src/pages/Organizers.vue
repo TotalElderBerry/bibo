@@ -17,11 +17,40 @@
             <img src="../assets/csps.png" width="150"/>
         </div>
     </section>
-    <RegisterOrgModal />
+    <RegisterOrgModal :registerForm="registerForm"  @registerEvent="registerAsync"/>
     <LoginOrgModal />
 </template>
 
 <script setup>
 import RegisterOrgModal from '../components/RegisterOrgModal.vue';
 import LoginOrgModal from '../components/LoginOrgModal.vue';
+import {ref} from 'vue'
+import axios from 'axios';
+const registerForm = ref({
+    name: '',
+    email: '',
+    password: ''
+})
+
+const loginForm = ref({
+    name: '',
+    alias: '',
+    email: '',
+    password: ''
+})
+
+const registerAsync = async () => {
+    try {
+        const form = new FormData()
+        form.append('name', registerForm.value.name)
+        form.append('email', registerForm.value.email)
+        form.append('password', registerForm.value.password)
+                
+        const response = await axios.post('http://localhost:5000/event_organizer/register',form, {
+            headers: {'Content-Type': 'multipart/form-data'}
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
 </script>

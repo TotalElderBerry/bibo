@@ -56,7 +56,7 @@ const routes = [
     component: Organizer,
   },
   {
-    path: '/organizer/event/:id',
+    path: '/organizer/event/:slug',
     name: 'OrganizerEvent',
     component: OrganizerEvent,
   },
@@ -84,8 +84,8 @@ router.beforeEach((to, _from, next) => {
   const photogId = get('photog_id')
   const eventOrgId = get('eventOrg_id')
 
-  if(runnerId) store.isPhotographerLoggedIn = true
-  if(photogId) store.isRunnerLoggedIn = true
+  if(runnerId) store.isRunnerLoggedIn = true
+  if(photogId) store.isPhotographerLoggedIn = true
   if(eventOrgId) store.isEventOrgLoggedIn = true
 
   next()
