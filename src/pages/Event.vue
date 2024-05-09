@@ -97,11 +97,11 @@
                     <h1 class="font-bold text-lg">Registration</h1>
                         <div>
                             <label for="myname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
-                            <input  type="text" name="myname" id="myname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-tertiary-500 focus:border-tertiary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Your Name"  />
+                            <input disabled v-model="runner.first_name"  type="text" name="myname" id="myname" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-tertiary-500 focus:border-tertiary-500 bg-tertiary-50 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Your Name"  />
                         </div>
                         <div>
                             <label for="myname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
-                            <input  type="text" name="myname" id="myname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-tertiary-500 focus:border-tertiary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Your Name"  />
+                            <input disabled v-model="runner.last_name" type="text" name="myname" id="myname" class="bg-tertiary-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-tertiary-500 focus:border-tertiary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Your Name"  />
                         </div>
                         <div>
                             <label for="alias" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Shipping Address</label>
@@ -161,7 +161,11 @@ import { Modal } from 'flowbite';
 const route = useRoute()
 const router = useRouter()
 const event = ref({})
-const runner = ref()
+const runner = ref({
+    first_name: '',
+    last_name: ''
+})
+
 const isLoading = ref(true)
 const category = ref('5 km')
 const months = ref()
@@ -194,8 +198,9 @@ const getRunnerById = async () => {
     const id = get('runner_id')
     console.log(id);
     try {
-        const response = await axios.get(`http://localhost:5000/runner/${id}`)
-        console.log(response.data[1]);
+        const response = await axios.get(`http://localhost:5000/runner/one/${id}`)
+        // console.log(response.data[1].data);
+        runner.value = response.data[1].data
     } catch (error) {
         
     }
@@ -209,7 +214,7 @@ const registerEvent = async () => {
         const response = await axios.post(`http://localhost:5000/runner/${id}/register_event/${event.value.id}`, form)
         console.log(response.data);
         if(response.data.success){
-            router.push({name: 'RegistrationSuccess'})
+            router.push({name: 'RegistrationSuccess', params: {id: event.value.slug}})
             const $targetEl = document.getElementById('confirm-modal');
             const modal = new Modal($targetEl)
             modal.hide()

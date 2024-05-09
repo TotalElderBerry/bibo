@@ -128,6 +128,9 @@ const loginAsync = async () => {
         if(response.data[0].success){
             store.isRunnerLoggedIn = true;
             const id = response.data[1].data
+            const $targetEl = document.getElementById('login-modal');
+            const modal = new Modal($targetEl)
+            modal.hide()
             set("runner_id",id);
         }
     } catch (error) {

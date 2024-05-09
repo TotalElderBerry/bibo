@@ -4,13 +4,13 @@
             <div class="text-3xl text-gray-800 font-medium flex justify-center gap-2">
                 <CheckBadgeIcon class="w-7 text-tertiary-900"/>
                 <h1>
-                    SM2SM RUN 2024
+                    {{event.name}}
                 </h1>
                 <CheckBadgeIcon class="w-7 text-tertiary-900"/>
             </div>
             <hr class="my-5 border border-white"/>
             <div>
-                <p>Thank you for registering for SM2SM Run 2024. See you on January 24,2020</p>
+                <p>Thank you for registering for {{event.name}}. See you on January 24,2020</p>
             </div>
 
             <div class="text-xs font-light mt-4">
@@ -28,7 +28,25 @@
 
 <script setup>
 import { CheckBadgeIcon } from '@heroicons/vue/24/solid';
+import axios from 'axios';
+import {ref,onMounted} from 'vue'
+import { useRoute } from 'vue-router';
 
-CheckBadgeIcon
+const route = useRoute()
+const event = ref({})
+const getEventBySlug = async () => {
+    const eventSlug = route.params.id
+    try {
+        const response = await axios.get(`http://localhost:5000/event/slug/${route.params.id}`)
+        // console.log(response.data);
+        event.value = response.data[1].data
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+onMounted(async() => {
+    await getEventBySlug()
+})
 
 </script>

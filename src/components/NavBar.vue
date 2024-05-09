@@ -1,8 +1,9 @@
 <template>
     <nav class="bg-white border-gray-200 dark:bg-gray-900 mt-2 max-w-screen-xl mx-auto">
     <div class="flex flex-wrap items-center justify-between mx-auto ">
-        <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="../assets/logo.png" class="h-16" alt="Logo" />
+        <a href="/" class="flex items-center">
+            <img src="../assets/v2.png" class="h-20" alt="Logo" />
+            <img src="../assets/logo.png" class="h-20 ml-[-25px]" alt="Logo" />
             <!-- <span class="self-center text-2xl font-bold whitespace-nowrap dark:text-white">BIB-O</span> -->
         </a>
         <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">

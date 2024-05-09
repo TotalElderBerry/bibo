@@ -186,8 +186,6 @@ const isRegisteringLoading = ref(false)
 const approveRunner = async () => {
     isRegisteringLoading.value = true
     try {
-        console.log(selectedRunner.value.id);
-        console.log(event.value.id);
         const response = await axios.post(`http://localhost:5000/event_organizer/${event.value.id}/${selectedRunner.value.id}/approve_reg`)
         const $targetEl = document.getElementById('default-modal');
         const modal = new Modal($targetEl)
