@@ -24,7 +24,7 @@
         </div> -->
     </div>
         
-    <div class="max-w-screen-xl mx-auto mt-5 grid grid-cols-3 gap-2">
+    <div class="max-w-screen-xl mx-auto mt-5 grid grid-cols-3 gap-2 mb-5">
         <div v-for="event in events" class=" max-w-sm p-6 bg-tertiary-50 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <a :href="`/events/${event.slug}`">
                 <h5 class="mb-1 text-2xl font-bold tracking-tight text-gray-700 dark:text-white mt-2">{{event.name}}</h5>
@@ -155,6 +155,14 @@ const getEvents = async () => {
     try {
         const response = await axios.get('http://localhost:5000/event')
         events.value = response.data[1].data
+        const dateNow = new Date()
+        events.value = events.value.filter(event => {
+            const eventDate = new Date(event.date)
+            if(eventDate > dateNow){
+                return event
+            }
+        })
+        console.log(events.value);
     } catch (error) {
         console.log(error);
     }

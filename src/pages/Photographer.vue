@@ -1,6 +1,10 @@
 <template>
-    <div class="mt-10 max-w-screen-xl mx-auto flex flex-col h-screen">
+    <div class="mt-10 px-4 max-w-screen-xl mx-auto flex flex-col h-screen">
         <div>
+            <div class="mb-5 ">
+                <h1 class="text-4xl font-semibold text-tertiary-600">Hello, {{ runner.alias }}</h1>
+                <p class="text-md text-light text-gray-600">Select a running event to contribute your photos</p>
+            </div>
             <form class="flex items-center max-w-sm mx-auto">   
                 <label for="simple-search" class="sr-only">Search</label>
                 <div class="relative w-full">
@@ -20,7 +24,7 @@
             </form>
         </div>
 
-        <h1 class="mt-10 mb-5 text-3xl font-medium">Latest</h1>
+        <h1 class="mt-10 mb-2 text-2xl font-medium text-tertiary-600">Latest Run Events</h1>
 
         <div class="grid grid-cols-3 gap-2">
             <div class="grid grid-cols-1 my-2" v-for="e in events">
@@ -52,18 +56,21 @@ import { CalendarDaysIcon, MapPinIcon } from '@heroicons/vue/24/solid';
 import {onMounted, ref} from 'vue'
 import axios from 'axios'
 import {getReadableDate} from '../utils/date'
+import { get } from '../utils/localstorage';
 const event = ref({
     name: '',
     venue: '',
     date: '',
     datetime_created: ''
 })
+const runner = ref({})
 
 const events = ref([])
 
 onMounted(async() => {
     try {
         await getEvents()
+        await getPhotographerById()
     } catch (error) {
         
     }
@@ -77,6 +84,17 @@ const getEvents = async () => {
         console.log(response.data[1].data);
     } catch (error) {
         console.log(error);
+    }
+}
+
+const getPhotographerById = async () => {
+    try {
+        const photog_id = get("photog_id")
+        const response = await axios.get(`http://localhost:5000/photographer/${photog_id}`)
+        console.log(response);
+        runner.value = response.data[1].data
+    } catch (error) {
+        
     }
 }
 </script>

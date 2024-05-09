@@ -37,7 +37,7 @@
                         </div>
                         <a href="#" class="text-sm text-tertiary-700 hover:underline dark:text-tertiary-500">Lost Password?</a>
                     </div>
-                    <button data-modal-hide="login-modal" @click="() => $router.push('/organizer')" class="w-full text-white bg-tertiary-700 hover:bg-tertiary-800 focus:ring-4 focus:outline-none focus:ring-tertiary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-tertiary-600 dark:hover:bg-tertiary-700 dark:focus:ring-tertiary-800">Login to your account</button>
+                    <button data-modal-hide="login-modal" @click="() => emit('loginEvent')" class="w-full text-white bg-tertiary-700 hover:bg-tertiary-800 focus:ring-4 focus:outline-none focus:ring-tertiary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-tertiary-600 dark:hover:bg-tertiary-700 dark:focus:ring-tertiary-800">Login to your account</button>
                     <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
                         Not registered? <a href="" class="text-tertiary-700 hover:underline dark:text-tertiary-500">Create account</a>
                     </div>
@@ -50,6 +50,7 @@
 </template>
 
 <script setup>
-import {useRouter} from 'vue-router'
-const $router = useRouter()
+
+
+const emit = defineEmits(['loginEvent'])
 </script>

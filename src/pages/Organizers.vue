@@ -18,7 +18,7 @@
         </div>
     </section>
     <RegisterOrgModal :registerForm="registerForm"  @registerEvent="registerAsync"/>
-    <LoginOrgModal />
+    <LoginOrgModal @loginEvent="loginAsync"/>
 </template>
 
 <script setup>
@@ -26,6 +26,11 @@ import RegisterOrgModal from '../components/RegisterOrgModal.vue';
 import LoginOrgModal from '../components/LoginOrgModal.vue';
 import {ref} from 'vue'
 import axios from 'axios';
+import {useRouter} from 'vue-router'
+import { set } from '../utils/localstorage';
+import { useStore } from '../store';
+const $router = useRouter()
+const store = useStore()
 const registerForm = ref({
     name: '',
     email: '',
@@ -52,5 +57,11 @@ const registerAsync = async () => {
     } catch (error) {
         console.log(error);
     }
+}
+
+const loginAsync = () => {
+    $router.push('/organizer')
+    set('eventOrg_id',1)
+    store.isEventOrgLoggedIn = true
 }
 </script>

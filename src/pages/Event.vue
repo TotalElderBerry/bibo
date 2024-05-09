@@ -1,6 +1,6 @@
 <template>
-    <div class="max-w-screen-xl p-4 mx-auto mt-10" v-if="!isLoading">
-        <div class="relative flex justify-center mb-10 bg-tertiary-200 p-10 rounded-xl">
+    <div class="max-w-screen-xl p-4 mx-auto " v-if="!isLoading">
+        <div class=" relative flex justify-center mb-10 bg-tertiary-200 p-10 rounded-xl">
             <div class="absolute inset-0  flex bg-red-300 rounded-xl">
                 <img  src="../assets/runningman.jpg" class="max-h-full rounded-xl w-full object-cover bg-center">
             </div>
@@ -33,8 +33,8 @@
             </div>
         </div>
         <div class="grid grid-cols-3">
-            <div>
-                <div class="h-[260px] max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div class="items-center ">
+                <div class="h-[260px] max-w-sm p-6 bg-tertiary-50 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <div class="flex justify-between">
                         <div>
                         <h5 class="text-md font-medium tracking-tight text-tertiary-800 dark:text-white mt-2">EVENT</h5>
@@ -160,7 +160,7 @@ import RegConfirmationModal from '../components/RegConfirmationModal.vue';
 import { Modal } from 'flowbite';
 const route = useRoute()
 const router = useRouter()
-const event = ref()
+const event = ref({})
 const runner = ref()
 const isLoading = ref(true)
 const category = ref('5 km')
@@ -192,9 +192,10 @@ const getEventBySlug = async () => {
 
 const getRunnerById = async () => {
     const id = get('runner_id')
+    console.log(id);
     try {
         const response = await axios.get(`http://localhost:5000/runner/${id}`)
-        console.log(response);
+        console.log(response.data[1]);
     } catch (error) {
         
     }
@@ -258,8 +259,8 @@ watch(seconds, () => {
 
 onMounted(async() => {
     await getEventBySlug()
+    await getRunnerById()
     updateCountdown()
-    // await getRunnerById()
 })
 
 </script>

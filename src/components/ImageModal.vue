@@ -24,12 +24,17 @@
                 </div>
                 <!-- Modal body -->
                 <div class="space-y-4 flex justify-center p-3 bg-tertiary-50">
-                    <img :src="props.img" class=" max-h-[350px]"/>
+                    <img :src="props.img" class=" max-h-[500px]"/>
                 </div>
                 <!-- Modal footer -->
-                <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                    <!-- <button data-modal-hide="default-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
-                    <button data-modal-hide="default-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Decline</button> -->
+                <div class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                    <button data-modal-hide="default-modal" type="button" class="flex items-center gap-2 text-white bg-tertiary-700 hover:bg-tertiary-800 focus:ring-4 focus:outline-none focus:ring-tertiary-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center dark:bg-tertiary-600 dark:hover:bg-tertiary-700 dark:focus:ring-tertiary-800">
+                        <ArrowDownCircleIcon class="w-5" />
+                        Download</button>
+                    <button data-modal-hide="default-modal" type="button" class="flex  items-center text-tertiary-500  gap-2 py-2.5 px-3 ms-3 text-sm font-medium focus:outline-none bg-white rounded-lg border border-tertiary-200 hover:bg-tertiary-100 hover:text-tertiary-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                        <span><GiftIcon class="w-3.5 text-tertiary-700 "/></span>
+                        Make a Donation
+                    </button>
                 </div>
             </div>
         </div>
@@ -38,7 +43,7 @@
 </template>
 
 <script setup>
-
+import { ArrowDownCircleIcon, GiftIcon } from '@heroicons/vue/24/solid';
 const props = defineProps(['img','eventInfo'])
 
 </script>
